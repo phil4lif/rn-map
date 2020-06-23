@@ -29,11 +29,12 @@ userSchema.pre('save', function(next) {
                 return next(err);
             }
             user.password = hash;
+            next();
         });
     });
 });
 
-userSchama.methods.comparePassword = function(candidatePassword) {
+userSchema.methods.comparePassword = function comparePassword(candidatePassword) {
     const user = this
     return new Promise((resolve, reject) => {
         bcrypt.compare(candidatePassword, user.password, (err, isMatch) => {
